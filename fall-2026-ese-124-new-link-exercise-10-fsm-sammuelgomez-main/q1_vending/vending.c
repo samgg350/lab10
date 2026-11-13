@@ -10,13 +10,13 @@
 /* TODO 1: fill both tables.  row = state, column = input.
                                                  NICKEL  DIME   QUARTER  CANCEL */
 const VState next_state[NUM_STATES][NUM_INPUTS] = {
-    /* S0  */ { S0, S0, S0, S0 },
-    /* S5  */ { S0, S0, S0, S0 },
-    /* S10 */ { S0, S0, S0, S0 } };
+    /* S0  */ { S5,  S10, S0,  S0 },
+    /* S5  */ { S10, S0,  S5,  S0 },
+    /* S10 */ { S0,  S0,  S10, S0 } };
 const Action action_table[NUM_STATES][NUM_INPUTS] = {
-    /* S0  */ { WAIT, WAIT, WAIT, WAIT },
-    /* S5  */ { WAIT, WAIT, WAIT, WAIT },
-    /* S10 */ { WAIT, WAIT, WAIT, WAIT } };
+    /* S0  */ { WAIT, WAIT,        REJECT, WAIT   },
+    /* S5  */ { WAIT, VEND,        REJECT, REFUND },
+    /* S10 */ { VEND, VEND_CHANGE, REJECT, REFUND } };
 const int CENTS[NUM_STATES] = { 0, 5, 10 };                     /* given */
 
 static const char *STATE_NAME[NUM_STATES] = { "S0", "S5", "S10" };
@@ -26,7 +26,10 @@ const char *action_name(Action a) { return ACTION_NAME[a]; }    /* given */
 
 int column_of(char c) {
     /* TODO 2: 'N' -> NICKEL, 'D' -> DIME, 'Q' -> QUARTER, 'C' -> CANCEL, any other char -> -1 */
-    (void)c;
+    if (c == 'N') return NICKEL;
+    if (c == 'D') return DIME;
+    if (c == 'Q') return QUARTER;
+    if (c == 'C') return CANCEL;
     return -1;
 }
 
@@ -35,7 +38,7 @@ Action vend_step(VState *s, int col) {
                 *s = next_state[*s][col];             (then move)
                 return a;
        No switch and no if here: the tables ARE the machine.                    */
-    (void)s;
-    (void)col;
-    return WAIT;
+    Action a = action_table[*s][col];
+    *s = next_state[*s][col];
+    return a;
 }

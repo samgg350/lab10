@@ -19,31 +19,48 @@ SState next_switch(SState s, CharClass c, Action *a) {
          case STAR:   ...
          default:     *a = A_NONE;  return CODE;
          }                                                                       */
-    (void)s;
-    (void)c;
-    *a = A_COPY;
-    return CODE;
+    switch (s) {
+    case CODE:
+        if (c == C_SLASH) { *a = A_NONE; return SLASH; }
+        *a = A_COPY;
+        return CODE;
+    case SLASH:
+        if (c == C_SLASH) { *a = A_COPY; return SLASH; }
+        if (c == C_STAR) { *a = A_START; return BLOCK; }
+        *a = A_FLUSH;
+        return CODE;
+    case BLOCK:
+        if (c == C_STAR) { *a = A_NONE; return STAR; }
+        *a = A_NONE;
+        return BLOCK;
+    case STAR:
+        if (c == C_SLASH) { *a = A_SPACE; return CODE; }
+        if (c == C_STAR) { *a = A_NONE; return STAR; }
+        *a = A_NONE;
+        return BLOCK;
+    default:
+        *a = A_NONE;
+        return CODE;
+    }
 }
 
 /* ---------- YOU: WAY 2 - the same machine as two tables ---------- */
 /* TODO 2: fill both tables (row = state, column = char class).   '/'   '*'   other */
 const SState next_table[NUM_STATES][NUM_CLASSES] = {
-    /* CODE  */ { CODE, CODE, CODE },
-    /* SLASH */ { CODE, CODE, CODE },
-    /* BLOCK */ { CODE, CODE, CODE },
-    /* STAR  */ { CODE, CODE, CODE } };
+    /* CODE  */ { SLASH, CODE,  CODE  },
+    /* SLASH */ { SLASH, BLOCK, CODE  },
+    /* BLOCK */ { BLOCK, STAR,  BLOCK },
+    /* STAR  */ { CODE,  STAR,  BLOCK } };
 const Action act_table[NUM_STATES][NUM_CLASSES] = {
-    /* CODE  */ { A_NONE, A_NONE, A_NONE },
-    /* SLASH */ { A_NONE, A_NONE, A_NONE },
-    /* BLOCK */ { A_NONE, A_NONE, A_NONE },
-    /* STAR  */ { A_NONE, A_NONE, A_NONE } };
+    /* CODE  */ { A_NONE,  A_COPY,  A_COPY  },
+    /* SLASH */ { A_COPY,  A_START, A_FLUSH },
+    /* BLOCK */ { A_NONE,  A_NONE,  A_NONE  },
+    /* STAR  */ { A_SPACE, A_NONE,  A_NONE  } };
 
 SState next_by_table(SState s, CharClass c, Action *a) {
     /* TODO 3:  *a = act_table[s][c];  return next_table[s][c];   (no switch, no if) */
-    (void)s;
-    (void)c;
-    *a = A_NONE;
-    return CODE;
+    *a = act_table[s][c];
+    return next_table[s][c];
 }
 
 /* ---------- GIVEN ---------- */
