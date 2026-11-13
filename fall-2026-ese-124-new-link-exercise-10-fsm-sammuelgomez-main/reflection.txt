@@ -1,14 +1,14 @@
 ESE 124 Lab 10 - Reflection  (about 3 minutes)
 Type a short answer after each colon. Keep every label.
 
-Name: 
-Hardest question (Q1-Q5):
-One bug I fixed (one sentence):
+Name: Sammuel Gomez
+Hardest question (Q1-Q5): Q5
+One bug I fixed (one sentence): I moved to the next state before reading the output, so every output came from the wrong row; I fixed it by reading the output first and moving last.
 
 ---- Peer Learning Log ----
 Help a classmate UNDERSTAND - do not give them your code or the answer.
 
-I helped (first name or initials):
+I helped (first name or initials): AR
 Topic (e.g. states, transitions, enum/switch, transition tables, debugging): transition tables and debugging (output first, move last)
 How I helped (one sentence): Their outputs came from the wrong row, so I asked them to trace one input on paper and say which state the output should come from; they saw they moved to the next state before reading the output and swapped the two lines themselves.
 Result - put x in ONE box:
