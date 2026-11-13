@@ -9,13 +9,13 @@ One bug I fixed (one sentence):
 Help a classmate UNDERSTAND - do not give them your code or the answer.
 
 I helped (first name or initials):
-Topic (e.g. states, transitions, enum/switch, transition tables, debugging):
-How I helped (one sentence):
+Topic (e.g. states, transitions, enum/switch, transition tables, debugging): transition tables and debugging (output first, move last)
+How I helped (one sentence): Their outputs came from the wrong row, so I asked them to trace one input on paper and say which state the output should come from; they saw they moved to the next state before reading the output and swapped the two lines themselves.
 Result - put x in ONE box:
-  [ ] They understood and continued on their own
+  [x] They understood and continued on their own
   [ ] They understood part, still needed help
   [ ] We both asked the TA/instructor
-I learned (one sentence):
+I learned (one sentence): In a Mealy machine the output belongs to the arrow, so it must be read with the OLD state before the state changes.
 
 Good: "I asked them to draw the state diagram and trace one input; they found the missing arrow themselves."
 Weak: "I gave them my code."
