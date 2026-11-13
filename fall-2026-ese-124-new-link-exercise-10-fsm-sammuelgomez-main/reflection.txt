@@ -1,0 +1,21 @@
+ESE 124 Lab 10 - Reflection  (about 3 minutes)
+Type a short answer after each colon. Keep every label.
+
+Name: 
+Hardest question (Q1-Q5):
+One bug I fixed (one sentence):
+
+---- Peer Learning Log ----
+Help a classmate UNDERSTAND - do not give them your code or the answer.
+
+I helped (first name or initials):
+Topic (e.g. states, transitions, enum/switch, transition tables, debugging):
+How I helped (one sentence):
+Result - put x in ONE box:
+  [ ] They understood and continued on their own
+  [ ] They understood part, still needed help
+  [ ] We both asked the TA/instructor
+I learned (one sentence):
+
+Good: "I asked them to draw the state diagram and trace one input; they found the missing arrow themselves."
+Weak: "I gave them my code."

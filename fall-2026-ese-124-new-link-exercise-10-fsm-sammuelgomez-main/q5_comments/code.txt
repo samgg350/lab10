@@ -1,0 +1,11 @@
+/* BroBot speed check */
+#include <stdio.h>
+
+int main(void) {
+    int laps = 12;      /* laps today */
+    int avg = laps / 4; /* integer division */
+    /* a comment
+       on two lines */
+    printf("%d\n", avg * 2); /** done **/
+    return 0;
+}

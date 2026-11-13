@@ -1,0 +1,15 @@
+---- clean code ----
+ 
+#include <stdio.h>
+
+int main(void) {
+    int laps = 12;       
+    int avg = laps / 4;  
+     
+    printf("%d\n", avg * 2);  
+    return 0;
+}
+---- end ----
+COMMENTS=5
+UNCLOSED=NO
+AGREE=YES

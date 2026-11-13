@@ -1,0 +1,6 @@
+N D
+D D
+Q N C
+N N N
+D x N
+D
