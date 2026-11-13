@@ -35,7 +35,10 @@ FState frfr_step(FState s, char c, int *found) {
         if (u == 'F') return S_FRF;
         return S0;
     case S_FRF:
-        if (u == 'R') { *found = 1; return S_FR; }
+        if (u == 'R') {
+            *found = 1;
+            return S_FR;
+        }
         if (u == 'F') return S_F;
         return S0;
     default:

@@ -21,21 +21,39 @@ SState next_switch(SState s, CharClass c, Action *a) {
          }                                                                       */
     switch (s) {
     case CODE:
-        if (c == C_SLASH) { *a = A_NONE; return SLASH; }
+        if (c == C_SLASH) {
+            *a = A_NONE;
+            return SLASH;
+        }
         *a = A_COPY;
         return CODE;
     case SLASH:
-        if (c == C_SLASH) { *a = A_COPY; return SLASH; }
-        if (c == C_STAR) { *a = A_START; return BLOCK; }
+        if (c == C_SLASH) {
+            *a = A_COPY;
+            return SLASH;
+        }
+        if (c == C_STAR) {
+            *a = A_START;
+            return BLOCK;
+        }
         *a = A_FLUSH;
         return CODE;
     case BLOCK:
-        if (c == C_STAR) { *a = A_NONE; return STAR; }
+        if (c == C_STAR) {
+            *a = A_NONE;
+            return STAR;
+        }
         *a = A_NONE;
         return BLOCK;
     case STAR:
-        if (c == C_SLASH) { *a = A_SPACE; return CODE; }
-        if (c == C_STAR) { *a = A_NONE; return STAR; }
+        if (c == C_SLASH) {
+            *a = A_SPACE;
+            return CODE;
+        }
+        if (c == C_STAR) {
+            *a = A_NONE;
+            return STAR;
+        }
         *a = A_NONE;
         return BLOCK;
     default:
