@@ -16,19 +16,20 @@
 /* TODO 1: fill both tables (4 rows x 3 columns).  row = state, column = input.
                                                  IN0  IN1  ERR */
 const LState next_state[NUM_STATES][NUM_INPUTS] = {
-    /* SX   */ { SX, SX, SX },
-    /* S0   */ { SX, SX, SX },
-    /* S01  */ { SX, SX, SX },
-    /* S011 */ { SX, SX, SX } };
+    /* SX   */ { S0, SX,   SX },
+    /* S0   */ { S0, S01,  SX },
+    /* S01  */ { S0, S011, SX },
+    /* S011 */ { S0, SX,   SX } };
 const int out_table[NUM_STATES][NUM_INPUTS] = {
     /* SX   */ { 0, 0, 0 },
     /* S0   */ { 0, 0, 0 },
     /* S01  */ { 0, 0, 0 },
-    /* S011 */ { 0, 0, 0 } };
+    /* S011 */ { 1, 0, 0 } };
 
 int column_of(char c) {
     /* TODO 2: '0' -> IN0, '1' -> IN1, anything else -> ERR */
-    (void)c;
+    if (c == '0') return IN0;
+    if (c == '1') return IN1;
     return ERR;
 }
 
@@ -37,9 +38,9 @@ int lock_step(LState *s, int col) {
                 *s = next_state[*s][col];         (then move)
                 return out;
        No switch and no if here.                                                  */
-    (void)s;
-    (void)col;
-    return 0;
+    int out = out_table[*s][col];
+    *s = next_state[*s][col];
+    return out;
 }
 
 /* ---------- GIVEN ---------- */

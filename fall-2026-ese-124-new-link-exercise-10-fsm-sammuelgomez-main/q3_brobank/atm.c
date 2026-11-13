@@ -66,8 +66,56 @@ void atm_step(Atm *m, Account acc[], int n, const char *line, char msg[]) {
              default:       break;
              }
        Use strcpy(msg, "...") to set the message.                                 */
-    (void)m;
-    (void)acc;
-    (void)n;
-    (void)got;
+    int k;
+    int pin;
+    double amt;
+
+    switch (m->state) {
+    case IDLE:
+        if (got == 2 && strcmp(cmd, "CARD") == 0) {
+            k = find_account(acc, n, arg);
+            if (k < 0) {
+                strcpy(msg, "NO SUCH ACCOUNT");
+            } else {
+                m->acct = k;
+                m->state = WAIT_PIN;
+                strcpy(msg, "INSERT PIN");
+            }
+        }
+        break;
+    case WAIT_PIN:
+        if (got == 2 && strcmp(cmd, "PIN") == 0 && sscanf(arg, "%d", &pin) == 1) {
+            if (pin == acc[m->acct].pin) {
+                m->state = READY;
+                strcpy(msg, "PIN OK");
+            } else {
+                strcpy(msg, "WRONG PIN");
+            }
+        } else if (got == 1 && strcmp(cmd, "EJECT") == 0) {
+            m->state = IDLE;
+            m->acct = -1;
+            strcpy(msg, "CARD RETURNED");
+        }
+        break;
+    case READY:
+        if (got == 1 && strcmp(cmd, "BALANCE") == 0) {
+            sprintf(msg, "BALANCE %.2f", acc[m->acct].balance);
+        } else if (got == 2 && strcmp(cmd, "WITHDRAW") == 0 && sscanf(arg, "%lf", &amt) == 1) {
+            if (amt <= 0) {
+                strcpy(msg, "INVALID AMOUNT");
+            } else if (amt > acc[m->acct].balance) {
+                strcpy(msg, "INSUFFICIENT FUNDS");
+            } else {
+                acc[m->acct].balance -= amt;
+                sprintf(msg, "CASH %.2f", amt);
+            }
+        } else if (got == 1 && strcmp(cmd, "EJECT") == 0) {
+            m->state = IDLE;
+            m->acct = -1;
+            strcpy(msg, "CARD RETURNED");
+        }
+        break;
+    default:
+        break;
+    }
 }
