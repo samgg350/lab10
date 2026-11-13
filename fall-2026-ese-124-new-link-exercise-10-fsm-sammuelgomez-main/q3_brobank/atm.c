@@ -1,6 +1,6 @@
 /*
  * ESE 124 - Exercise 10 - Q3: atm.c - the BroBank ATM as a SWITCH state machine
- * Name: ____________________   SBU ID: ____________
+ * Name: Sammuel Gomez          SBU ID: ____________
  *
  * YOU write: atm_step() at the bottom. The rules table is in atm.h and in the handout.
  */

@@ -1,6 +1,6 @@
 /*
  * ESE 124 - Exercise 10 - Q4: lock.c - the door lock as a MEALY machine with 2D ARRAYS
- * Name: ____________________   SBU ID: ____________
+ * Name: Sammuel Gomez          SBU ID: ____________
  *
  * YOU write: the two tables, column_of(), lock_step().   (main.c, lock.h, Makefile are given)
  * The arrows (input/output). Copy each one into ONE cell of next_state AND out_table:

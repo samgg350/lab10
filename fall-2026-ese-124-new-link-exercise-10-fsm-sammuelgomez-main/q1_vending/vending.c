@@ -1,6 +1,6 @@
 /*
  * ESE 124 - Exercise 10 - Q1: vending.c - the machine is TWO 2D ARRAYS
- * Name: ____________________   SBU ID: ____________
+ * Name: Sammuel Gomez          SBU ID: ____________
  *
  * YOU write: the two tables, column_of(), vend_step().   (main.c, vending.h, Makefile are given)
  * Copy the table from the handout: every arrow "state --input/action--> next" is ONE cell.

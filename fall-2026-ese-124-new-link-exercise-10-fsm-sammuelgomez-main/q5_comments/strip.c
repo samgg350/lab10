@@ -1,6 +1,6 @@
 /*
  * ESE 124 - Exercise 10 - Q5: strip.c - ONE machine written TWO ways
- * Name: ____________________   SBU ID: ____________
+ * Name: Sammuel Gomez          SBU ID: ____________
  *
  * YOU write: next_switch() (way 1), the two tables and next_by_table() (way 2).
  * main.c prints AGREE=YES only when both ways give exactly the same clean code.

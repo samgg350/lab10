@@ -1,6 +1,6 @@
 /*
  * ESE 124 - Exercise 10 - Q2: frfr.c - a SWITCH state machine
- * Name: ____________________   SBU ID: ____________
+ * Name: Sammuel Gomez          SBU ID: ____________
  *
  * YOU write: frfr_step() and count_frfr().   (main.c, frfr.h, Makefile are given)
  * Draw it first:  S0 --F--> S_F --R--> S_FR --F--> S_FRF --R--> (match!) S_FR
@@ -35,10 +35,7 @@ FState frfr_step(FState s, char c, int *found) {
         if (u == 'F') return S_FRF;
         return S0;
     case S_FRF:
-        if (u == 'R') {
-            *found = 1;
-            return S_FR;
-        }
+        if (u == 'R') { *found = 1; return S_FR; }
         if (u == 'F') return S_F;
         return S0;
     default:
